@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 // import { NavLink } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
@@ -15,11 +16,9 @@ const Candies = () => {
 
   return (
     <div>
-      <ul>
       {candies && candies.length? candies.map((candy) => (
-        <li key={candy.id}>{candy.name}</li>
+        <NavLink key={candy.id} to={`/candies/${candy.id}`} >{candy.name}</NavLink>
       )) : null}
-      </ul>
     </div>
   )
 };

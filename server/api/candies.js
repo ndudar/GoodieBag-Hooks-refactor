@@ -11,4 +11,14 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/:candyId", async (req, res, next) => {
+  try {
+    const candy = await Candy.findByPk(req.params.candyId);
+    res.json(candy);
+  } catch (err) {
+    console.log("ERROR IN THE SINGLE CANDY ROUTE:", err);
+    next(err);
+  }
+});
+
 module.exports = router;

@@ -4,7 +4,6 @@ import axios from "axios";
 export const fetchCandiesAsync = createAsyncThunk(
   "candies/fetchCandies",
   async () => {
-    console.log("HELLO FROM THE THUNK");
     const response = await axios.get("/api/candies");
     const candies = response.data;
     return candies;
@@ -18,7 +17,7 @@ export const candiesSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(
       fetchCandiesAsync.fulfilled,
-      (state, action) => (state = action.payload)
+      (state, action) => (action.payload)
     );
   },
 });

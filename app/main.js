@@ -4,9 +4,12 @@ import Root from "./Root";
 import { Provider } from "react-redux";
 import { store } from "./store";
 const root = createRoot(document.getElementById("main"));
+import { BrowserRouter } from "react-router-dom";
 
 root.render(
-  <Provider store={store}>
-    <Root />
-  </Provider>
+  <BrowserRouter>
+    <Provider store={store}>
+      <Root />
+    </Provider>
+  </BrowserRouter>
 );
