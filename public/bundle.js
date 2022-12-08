@@ -7020,7 +7020,17 @@ var Candy = function Candy() {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     dispatch((0,_candySlice__WEBPACK_IMPORTED_MODULE_2__.fetchCandyAsync)(candyId));
   }, [dispatch]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, candy.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, candy.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, candy.quantity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, candy.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, candy.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, candy.quantity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    type: "button",
+    onClick: function onClick() {
+      return dispatch((0,_candySlice__WEBPACK_IMPORTED_MODULE_2__.increment)());
+    }
+  }, "MORE!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    type: "button",
+    onClick: function onClick() {
+      return dispatch((0,_candySlice__WEBPACK_IMPORTED_MODULE_2__.decrement)());
+    }
+  }, "less..."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
     src: candy.imageUrl
   }));
 };
@@ -7198,8 +7208,10 @@ var selectCandies = function selectCandies(state) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "candySlice": () => (/* binding */ candySlice),
+/* harmony export */   "decrement": () => (/* binding */ decrement),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   "fetchCandyAsync": () => (/* binding */ fetchCandyAsync),
+/* harmony export */   "increment": () => (/* binding */ increment),
 /* harmony export */   "selectCandy": () => (/* binding */ selectCandy)
 /* harmony export */ });
 /* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
@@ -7223,26 +7235,25 @@ var fetchCandyAsync = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__.createAsy
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
-            console.log("HELLO FROM THE SINGLE CANDY THUNK");
-            _context.next = 4;
+            _context.next = 3;
             return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/candies/".concat(candyId));
 
-          case 4:
+          case 3:
             response = _context.sent;
             candy = response.data;
             return _context.abrupt("return", candy);
 
-          case 9:
-            _context.prev = 9;
+          case 8:
+            _context.prev = 8;
             _context.t0 = _context["catch"](0);
             console.log("ERROR IN THE CANDYSLICE THUNK", _context.t0);
 
-          case 12:
+          case 11:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 9]]);
+    }, _callee, null, [[0, 8]]);
   }));
 
   return function (_x) {
@@ -7257,7 +7268,14 @@ var candySlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__.createSlice)({
     quantity: 0,
     imageUrl: ""
   },
-  reducers: {},
+  reducers: {
+    increment: function increment(state) {
+      state.quantity += 1;
+    },
+    decrement: function decrement(state) {
+      state.quantity -= 1;
+    }
+  },
   extraReducers: function extraReducers(builder) {
     builder.addCase(fetchCandyAsync.fulfilled, function (state, action) {
       return action.payload;
@@ -7267,6 +7285,10 @@ var candySlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__.createSlice)({
 var selectCandy = function selectCandy(state) {
   return state.candy;
 };
+var _candySlice$actions = candySlice.actions,
+    increment = _candySlice$actions.increment,
+    decrement = _candySlice$actions.decrement;
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (candySlice.reducer);
 
 /***/ }),

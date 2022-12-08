@@ -5,7 +5,6 @@ export const fetchCandyAsync = createAsyncThunk(
   "candies/fetchCandy",
   async (candyId) => {
     try {
-      console.log("HELLO FROM THE SINGLE CANDY THUNK");
       const response = await axios.get(`/api/candies/${candyId}`);
       const candy = response.data;
       return candy;
@@ -23,11 +22,18 @@ export const candySlice = createSlice({
     quantity: 0,
     imageUrl: "",
   },
-  reducers: {},
+  reducers: {
+    increment(state) {
+      state.quantity += 1;
+    },
+    decrement(state) {
+      state.quantity -= 1;
+    },
+  },
   extraReducers(builder) {
     builder.addCase(
       fetchCandyAsync.fulfilled,
-      (state, action) => (action.payload)
+      (state, action) => action.payload
     );
   },
 });
@@ -35,5 +41,7 @@ export const candySlice = createSlice({
 export const selectCandy = (state) => {
   return state.candy;
 };
+
+export const { increment, decrement } = candySlice.actions;
 
 export default candySlice.reducer;
