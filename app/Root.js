@@ -3,22 +3,21 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Candies from "./Candies";
 import Navbar from "./Navbar";
 import Candy from "./Candy";
+import Home from "./Home";
 
 const Root = () => {
   return (
     <div>
       <nav>
         Goodie Bag
-          <Navbar />
+        <Navbar />
       </nav>
       <main>
-        <h1>Welcome to the Goodie Bag!</h1>
-        <p>What a nice home page for your goodies!</p>
-          <Routes>
-            {/* <Route path="/" element={} /> */}
-            <Route path="/candies" element={<Candies />} />
-            <Route path="/candies/:candyId" element ={<Candy />} />
-          </Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/candies" element={<Candies />} />
+          <Route path="/candies/:candyId" element={<Candy />} />
+        </Routes>
       </main>
     </div>
   );
